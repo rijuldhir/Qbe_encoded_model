@@ -64,9 +64,9 @@ dec_bias = tf.Variable(tf.constant(0.1, shape=[elem_num],
 
 inputs = []
 with tf.variable_scope('decoder') as vs:
-    for i in range(1):
+    for i in range(step_num):
         inputs.append(enc_state[0])
-    dec_inputs = tf.reshape(inputs,[batch_num,1,hidden_num1])
+    dec_inputs = tf.reshape(inputs,[batch_num,step_num,hidden_num1])
     #inputs = tf.reshape(tf.tile(enc_state[0], num_step),[1,num_step,512])
     #print(inputs)
     dec_outputs, dec_state = tf.nn.dynamic_rnn(dec_cell, dec_inputs, initial_state=enc_state,dtype=tf.float32,sequence_length=num_step)
